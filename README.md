@@ -1,8 +1,9 @@
-# A python library for the FitBit API
+## Update beeminder with fitbit data
 
-Didn't see one that fitted my needs so I build my own.
+Send data from a fitbit aria to beeminder
 
-## Usage
+
+### OAuth Usage
 
 Edit the fitbit.py file with your consumer key and secret.
 
