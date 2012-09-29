@@ -7,13 +7,13 @@ from datetime import datetime
 
 
 config = json.load(open('config.json', 'r'))
-fitbit_config = config['fitbit']
+config = config['fitbit']
 
-CONSUMER_KEY = fitbit_config['CONSUMER_KEY']
-CONSUMER_SECRET = fitbit_config['CONSUMER_SECRET']
-SERVER = fitbit_config['SERVER']
-secret = fitbit_config['secret']
-token = fitbit_config['token']
+CONSUMER_KEY = config['CONSUMER_KEY']
+CONSUMER_SECRET = config['CONSUMER_SECRET']
+SERVER = config['SERVER']
+secret = config['secret']
+token = config['token']
 
 access_token = 'oauth_token_secret=%s&oauth_token=%s' % (secret, token)
 
