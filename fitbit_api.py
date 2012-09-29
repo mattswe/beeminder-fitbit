@@ -40,7 +40,7 @@ def call(access_token, endpoint):
 def weight(date = datetime.strftime(datetime.now(), '%Y-%m-%d')):
 
     url = '/1/user/-/body/log/weight/date/%s/30d.json' % date
-    return call(access_token, endpoint=url)
+    return call(access_token, endpoint=url)['weight']
 
 
 if __name__ == '__main__':

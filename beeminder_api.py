@@ -10,16 +10,18 @@ config = config['beeminder']
 
 username = config['username']
 auth_token = config['auth_token']
-goal = 'test'
+goal = config['goal']
+url = 'https://www.beeminder.com/api/v1/users/%s/goals/%s/datapoints.json'
+url = url % (username, goal)
 
 
-def get(endpoint):
+def get(endpoint = url):
 
     r = requests.get(endpoint, params = {'auth_token': auth_token})
     return json.loads(r.text)
 
 
-def post(endpoint, payload):
+def post(endpoint = url, payload = {}):
 
     payload['auth_token'] = auth_token
     r = requests.post(endpoint, params = payload)
@@ -27,17 +29,19 @@ def post(endpoint, payload):
     return json.loads(r.text)
 
 
+def weight():
+
+    return get(url)
+
 
 if __name__ == '__main__':
 
     url = 'https://www.beeminder.com/api/v1/users/%s/goals/%s/datapoints.json'
     url = url % (username, goal)
     payload = {
-        "timestamp": 1325523600,
-        "value": 130.1,
+        "timestamp": 1348737207,
+        "value": 209.74,
         }
 
     result = post(url, payload)
-    print json.dumps(result, sort_keys=True, indent=4)
-    result = get(url)
     print json.dumps(result, sort_keys=True, indent=4)
