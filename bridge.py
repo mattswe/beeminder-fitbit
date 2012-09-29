@@ -3,15 +3,17 @@
 import os, httplib
 from oauth import oauth
 import json
+from datetime import datetime
 
 
 config = json.load(open('config.json', 'r'))
+fitbit_config = config['fitbit']
 
-CONSUMER_KEY = config['CONSUMER_KEY']
-CONSUMER_SECRET = config['CONSUMER_SECRET']
-SERVER = config['SERVER']
-secret = config['secret']
-token = config['token']
+CONSUMER_KEY = fitbit_config['CONSUMER_KEY']
+CONSUMER_SECRET = fitbit_config['CONSUMER_SECRET']
+SERVER = fitbit_config['SERVER']
+secret = fitbit_config['secret']
+token = fitbit_config['token']
 
 access_token = 'oauth_token_secret=%s&oauth_token=%s' % (secret, token)
 
@@ -30,11 +32,17 @@ def call(access_token, endpoint):
     headers = oauth_request.to_header(realm='api.fitbit.com')
     connection.request('GET', endpoint, headers=headers)
     resp = connection.getresponse()
-    json = resp.read()
+    result = resp.read()
 
-    return json
+    return json.loads(result)
+
+
+def weight(date = datetime.strftime(datetime.now(), '%Y-%m-%d')):
+
+    url = '/1/user/-/body/log/weight/date/%s/30d.json' % date
+    return call(access_token, endpoint=url)
 
 
 if __name__ == '__main__':
 
-    print call(access_token, endpoint='/1/user/-/body/log/weight/date/2012-09-01/30d.json')
+    print json.dumps(weight(), sort_keys=True, indent=4)
