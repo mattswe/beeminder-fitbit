@@ -1,6 +1,10 @@
 ## Update beeminder with fitbit data
 
-Send data from a fitbit aria to beeminder
+Send data from a fitbit aria to beeminder.
+
+EDIT: The fine people at beeminder have built this functionality into the core product! Check it out [here](http://www.beeminder.com/fitbit)!
+
+
 
 
 ### OAuth Usage
